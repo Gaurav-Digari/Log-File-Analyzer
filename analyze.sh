@@ -12,12 +12,11 @@ usage(){
     echo
     echo "Don't use -p and -f together use only 1 at a time"
 }
-
 check_path() {
     local temp=$(dirname "$path")
     if [ -d "$temp" ]; then 
         if [ -f "$path" ];then
-        echo "File and path both exists"
+        log=$(basename "$path")
         return
         else
            echo "File Does not exists in your given path check Your path/file"
@@ -32,7 +31,7 @@ check_path() {
 check_file() {
     local temp="$file"
     if [ -s "$temp" ];then
-        echo "File exists"
+        log="$file"
         return
     else
         echo "File Does not exists check Your file"
@@ -53,5 +52,4 @@ do
     exit 1 ;;
   esac
 done
-
 
