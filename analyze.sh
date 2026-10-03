@@ -20,7 +20,7 @@ check_path() {
         echo "File and path both exists"
         return
         else
-           echo "File Does not exists check Your file"
+           echo "File Does not exists in your given path check Your path/file"
            exit 1
         fi
     else 
@@ -39,3 +39,19 @@ check_file() {
         exit 1
     fi
 }
+
+while getopts ":hp:f:" opt
+do
+  case $opt in
+  p) path="$OPTARG"
+    check_path ;;
+  f) file="$OPTARG"
+    check_file;;
+  h) usage
+  exit 1 ;;
+  *) usage 
+    exit 1 ;;
+  esac
+done
+
+
