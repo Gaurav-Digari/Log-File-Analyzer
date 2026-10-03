@@ -53,3 +53,20 @@ do
   esac
 done
 
+line=$(wc -l "$log")
+err=$(grep -wc "ERROR" "$log")
+feq=$(grep -w "ERROR" server.log | sed 's/.*ERROR //' | sort | uniq -c | sort -nr | head -n 5 )
+ip=$(grep -oE "[1-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" "$log" | sort | uniq )
+
+echo "==========REPORT OF LOG FILE =========="
+echo 
+echo "Total lines in the file ${line}"
+echo 
+echo "Total lines in the file ${err}"
+echo 
+echo "5 most frequently occurring error messages "
+echo "${feq}"
+echo 
+echo "Unique ip addresses"
+echo "${ip}"
+echo 
